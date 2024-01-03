@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const companies = [
+      { name: "Company One", category: "Finance", start: 1981, end: 2004 },
+      { name: "Company Two", category: "Retail", start: 1992, end: 2008 },
+      { name: "Company Three", category: "Auto", start: 1999, end: 2007 },
+      { name: "Company Four", category: "Retail", start: 1989, end: 2010 },
+      { name: "Company Five", category: "Technology", start: 2009, end: 2014 },
+      { name: "Company Six", category: "Finance", start: 1987, end: 2010 },
+      { name: "Company Seven", category: "Auto", start: 1986, end: 1996 },
+      { name: "Company Eight", category: "Technology", start: 2011, end: 2016 },
+      { name: "Company Nine", category: "Retail", start: 1981, end: 1989 }
+    ];
+
+    const ages = [33, 12, 20, 16, 5, 54, 21, 44, 61, 13, 15, 45, 25, 64, 32];
+
+    const person = {
+      name: "Costas",
+      address: {
+        street: "Lalaland 12"
+      }
+    };
+
+    // Faz console.log do nome de cada empresa usando forEach;
+
+    const getCompanyName = () => {
+      companies.forEach((company) => {
+        console.log(`Nome da empresa: ${company.name}`);
+      });
+    }
+
+    getCompanyName();
+
+    // Faz console.log do nome de cada empresa iniciada após 1987;
+
+    const getCompanyOlderThan = (start) => companies.filter((company) => company.start > start);
+
+    console.log(getCompanyOlderThan(1987));
+
+    // Faz console.log da soma se somar todas os valores do array ages usando reduce;
+
+    const initialValue = 0;
+    const sumAges = ages.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue,);
+
+    console.log(sumAges);
+
+    // Faz console.log de um novo objeto que tenha as propriedades de name e category iguais a companies[0], usando o destructuring de objects.
+    
+    /*const nameCompanyZero = companies[0].name;
+    const categoryCompanyZero = companies[0].category;
+
+    const companyZero = {nameCompanyZero, categoryCompanyZero};
+
+    console.log(companyZero);*/
+
+    const [zero, ...rest] = companies;
+    const nameCompanyZero = zero.name;
+    const categoryCompanyZero = zero.category
+    
+    const companyZero = {nameCompanyZero, categoryCompanyZero};
+
+    console.log(companyZero);
+
+    // Faz destructuring da propriedade street e cria uma variável chamada street do object person.
+
+    const {street} = person.address;
+    
+    console.log(street);
+
+    // Cria uma função que devolve as companies que tenham uma data de início superior a 1996 e inferior a 2004, inclusivé.
+
+    const getCompanyAgeBetween = (start, end) => companies.filter((company) => company.start >= start && company.end <= end);
+
+    console.log(getCompanyAgeBetween(1996,2004));
+  </script>
+</body>
+</html>

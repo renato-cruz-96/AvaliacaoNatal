@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    
+
+    const promise = new Promise((resolve, reject) => {
+      const requestCatFacts = new XMLHttpRequest();
+
+      requestCatFacts.open("GET", "https://cat-fact.herokuapp.com/facts/");
+
+      requestCatFacts.responseType = 'json';
+
+      requestCatFacts.onreadystatechange = function() {
+        console.log(requestCatFacts.readyState);
+      };
+
+      requestCatFacts.onload = () => {
+        const catFactsList = requestCatFacts.response;
+        resolve(catFactsList);
+      };
+
+      requestCatFacts.onerror = () => {
+      reject("Pedido Não Concluído!");
+    };
+
+      requestCatFacts.send();
+    });
+
+    promise.then(function(result){
+    result.forEach((fact) => {
+        console.log(`Fact: ${fact.text}`);
+      });
+    });
+    promise.catch(function(error){
+    console.log(error);
+    });
+  </script>
+</body>
+</html>
