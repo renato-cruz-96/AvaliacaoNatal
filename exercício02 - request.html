@@ -16,13 +16,8 @@
 
       requestCatFacts.responseType = 'json';
 
-      requestCatFacts.onreadystatechange = function() {
-        console.log(requestCatFacts.readyState);
-      };
-
       requestCatFacts.onload = () => {
-        const catFactsList = requestCatFacts.response;
-        resolve(catFactsList);
+        resolve(requestCatFacts.response);
       };
 
       requestCatFacts.onerror = () => {
@@ -32,14 +27,16 @@
       requestCatFacts.send();
     });
 
-    promise.then(function(result){
-    result.forEach((fact) => {
-        console.log(`Fact: ${fact.text}`);
-      });
-    });
-    promise.catch(function(error){
-    console.log(error);
-    });
+    async function getCatFactsText(){
+      try{
+        const catFactsText = await promise;
+        catFactsText.forEach((fact) => {console.log(`Fact: ${fact.text}`)});
+      } catch (error) {
+        console.log(error);
+      };
+    };
+
+    console.log(getCatFactsText());
   </script>
 </body>
 </html>
